@@ -10,7 +10,7 @@
 3. В меню реализовано 4 основные команды: **Пополнение средств**, **Списание средств**, **Информация о балансе**, **Полная информацию о карте**. 
 
 ### Фото выбора банковских карт
-![bank_card.jpg](..%2F..%2F..%2FDownloads%2Fbank_card.jpg)
+![bank_card.jpg](src/main/resources/projectImage/bank_card.jpg)
 
 ### Фото основных команд для управления банковской картой
-![menu_command.jpg](..%2F..%2F..%2FDownloads%2Fmenu_command.jpg)
+![menu_command.jpg](src/main/resources/projectImage/menu_command.jpg)
