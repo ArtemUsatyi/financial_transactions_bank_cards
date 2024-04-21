@@ -28,7 +28,7 @@ public class MenuCommandService {
             }
 
             System.out.println("""
-                    Желаете продолжить работу с данной картой?
+                    Продолжить работу в приложении?
                     1 - да
                     2 - нет""");
             command = scanner.nextInt();
