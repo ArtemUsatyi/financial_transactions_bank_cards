@@ -5,14 +5,15 @@ import static org.example.constance.ConstanceApplication.LIMIT_CREDIT_SIMPLE;
 public class CreditSimpleCard extends CreditCard {
     private long bankAccount;
     private long bankCreditLimitAccount = LIMIT_CREDIT_SIMPLE;
-    private final Short cashbackValueSimple = 3;
-    private final Short cashbackValueMax = 3;
+    private final Short cashbackValueSimple = 2;
+    private final Short cashbackValueMax = 4;
     private final Short bonusAccountAccrual = 2;
 
     @Override
     public void topUpAccount(Long amount) {
-        if (bankCreditLimitAccount < 10000) {
-            long differentLimitMoney = 10000 - bankCreditLimitAccount;
+        Long cashbackAmount = amount;
+        if (bankCreditLimitAccount < LIMIT_CREDIT_SIMPLE) {
+            long differentLimitMoney = LIMIT_CREDIT_SIMPLE - bankCreditLimitAccount;
             if (differentLimitMoney <= amount) {
                 bankCreditLimitAccount = LIMIT_CREDIT_SIMPLE;
                 amount -= differentLimitMoney;
@@ -21,22 +22,23 @@ public class CreditSimpleCard extends CreditCard {
                 bankCreditLimitAccount += amount;
             }
         } else bankAccount += amount;
-        accountAccrualForTopUp(amount);
+        System.out.println("Средства зачислены на счет");
+        accountAccrualForTopUp(cashbackAmount);
     }
 
     @Override
-    public String payAccount(Long amount) {
+    public void payAccount(Long amount) {
         if (bankAccount >= amount) {
             bankAccount -= amount;
             cashbackForPay(amount);
-            return "Платеж успешно завершен";
+            System.out.println("Платеж успешно завершен");
         } else if (bankCreditLimitAccount + bankAccount >= amount) {
+            cashbackForPay(amount);
             amount -= bankAccount;
             bankAccount = 0;
             bankCreditLimitAccount -= amount;
-            cashbackForPay(amount);
-            return "Платеж успешно завершен";
-        } else return "Платеж не прошел, недостаточно средств на карте";
+            System.out.println("Платеж успешно завершен");
+        } else System.out.println("Платеж не прошел, недостаточно средств на карте");
     }
 
     @Override
@@ -53,6 +55,7 @@ public class CreditSimpleCard extends CreditCard {
     private void accountAccrualForTopUp(Long amount) {
         if (amount >= 3000) {
             this.bankAccount += bonusAccountAccrual;
+            System.out.println("Бонус за пополнение зачислен, в размере -" + bonusAccountAccrual);
         }
     }
 
@@ -60,9 +63,11 @@ public class CreditSimpleCard extends CreditCard {
         if (amount > 100 && amount < 5000) {
             long cashback = amount / 100;
             bankAccount += cashback * cashbackValueSimple;
+            System.out.println("Зачислен кешбек - " + cashback * cashbackValueSimple);
         } else if (amount >= 5000) {
             long cashback = amount / 100;
             bankAccount += cashback * cashbackValueMax;
+            System.out.println("Зачислен максимальный кешбек - " + cashback * cashbackValueMax);
         }
     }
 }

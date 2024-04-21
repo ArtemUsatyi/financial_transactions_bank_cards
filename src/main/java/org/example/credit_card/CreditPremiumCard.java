@@ -11,8 +11,9 @@ public class CreditPremiumCard extends CreditCard {
 
     @Override
     public void topUpAccount(Long amount) {
-        if (bankCreditLimitAccount < 30000) {
-            long differentLimitMoney = 30000 - bankCreditLimitAccount;
+        Long cashbackAmount = amount;
+        if (bankCreditLimitAccount < LIMIT_CREDIT_PREMIUM) {
+            long differentLimitMoney = LIMIT_CREDIT_PREMIUM - bankCreditLimitAccount;
             if (differentLimitMoney <= amount) {
                 bankCreditLimitAccount = LIMIT_CREDIT_PREMIUM;
                 amount -= differentLimitMoney;
@@ -21,22 +22,23 @@ public class CreditPremiumCard extends CreditCard {
                 bankCreditLimitAccount += amount;
             }
         } else bankAccount += amount;
-        accountAccrualForTopUp(amount);
+        System.out.println("Средства зачислены на счет");
+        accountAccrualForTopUp(cashbackAmount);
     }
 
     @Override
-    public String payAccount(Long amount) {
+    public void payAccount(Long amount) {
         if (bankAccount >= amount) {
             bankAccount -= amount;
             cashbackForPay(amount);
-            return "Платеж успешно завершен";
+            System.out.println("Платеж успешно завершен");
         } else if (bankCreditLimitAccount + bankAccount >= amount) {
+            cashbackForPay(amount);
             amount -= bankAccount;
             bankAccount = 0;
             bankCreditLimitAccount -= amount;
-            cashbackForPay(amount);
-            return "Платеж успешно завершен";
-        } else return "Платеж не прошел, недостаточно средств на карте";
+            System.out.println("Платеж успешно завершен");
+        } else System.out.println("Платеж не прошел, недостаточно средств на карте");
     }
 
     @Override
@@ -53,6 +55,7 @@ public class CreditPremiumCard extends CreditCard {
     private void accountAccrualForTopUp(Long amount) {
         if (amount >= 3000) {
             this.bankAccount += bonusAccountAccrual;
+            System.out.println("Бонус за пополнение зачислен, в размере -" + bonusAccountAccrual);
         }
     }
 
@@ -60,9 +63,11 @@ public class CreditPremiumCard extends CreditCard {
         if (amount > 100 && amount < 5000) {
             long cashback = amount / 100;
             bankAccount += cashback * cashbackValueSimple;
+            System.out.println("Зачислен кешбек - " + cashback * cashbackValueSimple);
         } else if (amount >= 5000) {
             long cashback = amount / 100;
             bankAccount += cashback * cashbackValueMax;
+            System.out.println("Зачислен максимальный кешбек - " + cashback * cashbackValueMax);
         }
     }
 }

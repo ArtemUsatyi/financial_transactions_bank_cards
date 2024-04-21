@@ -8,8 +8,8 @@ public class DebitCard extends BankCard {
     }
 
     @Override
-    public String payAccount(Long amount) {
-        return null;
+    public void payAccount(Long amount) {
+
     }
 
     @Override
