@@ -28,7 +28,7 @@ public class DebitSimpleCard extends DebitCard {
 
     @Override
     public String getInfoAccountAll() {
-        return String.format("Общая информация о аккаунте:\nТекущий банковский счет - %s\nПростой кешбэк - %s\nМаксимальный кешбэк - %s\nБонусы карты - %s\n",
+        return String.format("Общая информация о аккаунте:\nТекущий банковский счет - %s\nПростой кешбэк - %s\nМаксимальный кешбэк - %s\nБонусы за пополнение карты - %s\n",
                 bankAccount, cashbackValueSimple, cashbackValueMax, bonusAccountAccrual);
     }
 
@@ -39,10 +39,10 @@ public class DebitSimpleCard extends DebitCard {
     }
 
     private void cashbackForPay(Long amount) {
-        if (amount > 100 && amount < 5000) {
+        if (amount > 100 && amount < 10000) {
             long cashback = amount / 100;
             bankAccount += cashback * cashbackValueSimple;
-        } else if (amount >= 5000) {
+        } else if (amount >= 10000) {
             long cashback = amount / 100;
             bankAccount += cashback * cashbackValueMax;
         }

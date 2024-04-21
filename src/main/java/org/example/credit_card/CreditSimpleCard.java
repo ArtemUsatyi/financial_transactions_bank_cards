@@ -1,9 +1,11 @@
 package org.example.credit_card;
 
+import static org.example.constance.ConstanceApplication.LIMIT_CREDIT_SIMPLE;
+
 public class CreditSimpleCard extends CreditCard {
     private long bankAccount;
-    private long bankCreditLimitAccount = 10000;
-    private final Short cashbackValueSimple = 1;
+    private long bankCreditLimitAccount = LIMIT_CREDIT_SIMPLE;
+    private final Short cashbackValueSimple = 3;
     private final Short cashbackValueMax = 3;
     private final Short bonusAccountAccrual = 2;
 
@@ -12,13 +14,13 @@ public class CreditSimpleCard extends CreditCard {
         if (bankCreditLimitAccount < 10000) {
             long differentLimitMoney = 10000 - bankCreditLimitAccount;
             if (differentLimitMoney <= amount) {
-                bankCreditLimitAccount = 10000;
+                bankCreditLimitAccount = LIMIT_CREDIT_SIMPLE;
                 amount -= differentLimitMoney;
                 bankAccount += amount;
             } else {
                 bankCreditLimitAccount += amount;
             }
-        } else bankAccount +=amount;
+        } else bankAccount += amount;
         accountAccrualForTopUp(amount);
     }
 
@@ -44,7 +46,7 @@ public class CreditSimpleCard extends CreditCard {
 
     @Override
     public String getInfoAccountAll() {
-        return String.format("Общая информация о аккаунте:\nТекущий банковский счет - %s\nКредитный лимит счета - %s\nПростой кешбэк - %s\nМаксимальный кешбэк - %s\nБонусы карты - %s\n",
+        return String.format("Общая информация о аккаунте:\nТекущий банковский счет - %s\nКредитный лимит счета - %s\nПростой кешбэк - %s\nМаксимальный кешбэк - %s\nБонусы за пополнение карты - %s\n",
                 bankAccount, bankCreditLimitAccount, cashbackValueSimple, cashbackValueMax, bonusAccountAccrual);
     }
 
