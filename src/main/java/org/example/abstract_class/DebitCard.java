@@ -1,8 +1,8 @@
-package org.example.credit_card;
+package org.example.abstract_class;
 
-import org.example.BankCard;
+import org.example.abstract_class.BankCard;
 
-public class CreditCard extends BankCard {
+public class DebitCard extends BankCard {
     @Override
     public void topUpAccount(Long amount) {
     }

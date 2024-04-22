@@ -1,4 +1,4 @@
-package org.example;
+package org.example.abstract_class;
 
 public abstract class BankCard {
     public abstract void topUpAccount(Long amount);

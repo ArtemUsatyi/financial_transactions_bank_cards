@@ -1,6 +1,6 @@
 package org.example.service;
 
-import org.example.BankCard;
+import org.example.abstract_class.BankCard;
 
 import java.util.List;
 import java.util.Scanner;

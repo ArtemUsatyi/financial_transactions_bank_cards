@@ -1,5 +1,7 @@
 package org.example.credit_card;
 
+import org.example.abstract_class.CreditCard;
+
 import static org.example.constance.ConstanceApplication.LIMIT_CREDIT_SIMPLE;
 
 public class CreditSimpleCard extends CreditCard {

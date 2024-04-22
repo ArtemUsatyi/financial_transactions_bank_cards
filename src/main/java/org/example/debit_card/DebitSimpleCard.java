@@ -1,5 +1,7 @@
 package org.example.debit_card;
 
+import org.example.abstract_class.DebitCard;
+
 public class DebitSimpleCard extends DebitCard {
     private long bankAccount;
     private final Short cashbackValueSimple = 1;

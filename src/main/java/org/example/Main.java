@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.abstract_class.BankCard;
 import org.example.credit_card.CreditPremiumCard;
 import org.example.credit_card.CreditSimpleCard;
 import org.example.debit_card.DebitPremiumCard;
